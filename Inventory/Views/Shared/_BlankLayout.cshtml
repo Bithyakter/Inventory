@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <!-- META LINK -->
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- PAGE TITLE -->
+   <title>Login Page</title>
+
+   <!--Style core CSS-->
+   <link href="~/Content/assets/css/login.css" rel="stylesheet" />
+
+   @*@Styles.Render("~/Content/css")
+   @Scripts.Render("~/bundles/modernizr")*@
+</head>
+
+<body>
+
+      @RenderBody()
+     
+
+   @*@Scripts.Render("~/bundles/jquery")
+   @Scripts.Render("~/bundles/bootstrap")
+   @RenderSection("scripts", required: false)*@
+
+   <script src="~/Content/assets/js/site.js" type="text/javascript"></script>
+
+   @*<script>
+       function validateForm() {
+           var username = document.getElementById("username").value;
+           var password = document.getElementById("password").value;
+
+           if (username.trim() === "" || password.trim() === "") {
+               alert("Please enter both username and password.");
+               return false;
+           }
+
+           alert("Login successful!");
+           return true;
+       }
+      </script>*@
+</body>
+</html>

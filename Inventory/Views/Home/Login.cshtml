@@ -1,0 +1,30 @@
+﻿@{
+   ViewBag.Title = "Login";
+   Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+<div class="container">
+   <!-- TITLE -->
+   <h1 class="title">Login</h1>
+
+   <!-- LOGIN FORM -->
+   <form id="loginForm" onsubmit="return validateForm()">
+      <!-- USERNAME -->
+      <div>
+         <label for="username">Username</label>
+         <input type="text" id="username" name="username" placeholder="Enter your username">
+      </div>
+
+      <!-- PASSWORD -->
+      <div>
+         <label for="password">Password</label>
+         <input type="password" id="password" name="password" placeholder="Enter your password">
+      </div>
+
+      <!-- SUBMIT BUTTON -->
+      <div>
+         @*<input type="submit" value="Login">*@
+         <a href="/Home/Dashboard" role="button" type="button" value="Login">Login</a>
+      </div>
+   </form>
+</div>
