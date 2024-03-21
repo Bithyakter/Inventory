@@ -1,8 +1,34 @@
-﻿
+﻿@model IEnumerable<Inventory.Models.Products>
+
 @{
-    ViewBag.Title = "Dashboard";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+   ViewBag.Title = "Dashboard";
+   Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Dashboard</h2>
+<div class="container">
+   <div class="row mt-4">
+      <div class="col-md-12">
+         <h2 class="text-center mb-4">Welcome to Dashboard</h2>
+      </div>
+   </div>
 
+   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      @foreach (var product in Model)
+      {
+         <div class="col">
+            <div class="card h-75 shadow">
+               <img src="https://source.unsplash.com/1600x900" class="card-img-top" alt="@product.Name">
+               <div class="card-body">
+                  <h5 class="card-title">@product.Name</h5>
+                  <p class="card-text">Category: @product.Categories.Name</p>
+                  <p class="card-text">Price: $@product.Price</p>
+                  <p class="card-text">@product.Description</p>
+               </div>
+               <div class="card-footer mt-0 pt-0">
+                  <button type="button" class="btn btn-success btn-sm">Add to Cart</button>
+               </div>
+            </div>
+         </div>
+      }
+   </div>
+</div>

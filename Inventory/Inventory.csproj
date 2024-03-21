@@ -136,7 +136,9 @@
   <ItemGroup>
     <Content Include="Content\assets\css\style.css" />
     <Content Include="Content\assets\img\apple-touch-icon.png" />
+    <Content Include="Content\assets\img\avatar1.png" />
     <Content Include="Content\assets\img\favicon.png" />
+    <Content Include="Content\assets\img\image.jpg" />
     <Content Include="Content\assets\img\logo.png" />
     <Content Include="Content\assets\img\product-1.jpg" />
     <Content Include="Content\assets\img\product-2.jpg" />
