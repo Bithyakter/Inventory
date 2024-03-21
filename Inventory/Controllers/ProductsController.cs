@@ -7,21 +7,28 @@ namespace Inventory.Controllers
    public class ProductsController : Controller
    {
       #region Products List
-      public ActionResult Products()
+      public ActionResult ProductList()
       {
          ProductService productService = new ProductService();
          ModelState.Clear();
+         ViewBag.SlNo = 1;
+
          return View(productService.GetAllProducts());
       }
+
       #endregion
 
       #region Create Product
       public ActionResult CreateProduct()
       {
+         CategoriesService categories = new CategoriesService();
+         ViewBag.Categories = categories.GetAllCategories();
+
          return View();
       }
 
       [HttpPost]
+      [ValidateAntiForgeryToken]
       public ActionResult CreateProduct(Products product)
       {
          try
@@ -33,6 +40,7 @@ namespace Inventory.Controllers
                if (productService.AddProduct(product))
                {
                   ViewBag.Message = "Product added successfully";
+                  //return RedirectToAction("ProductList");
                }
             }
 
@@ -48,20 +56,24 @@ namespace Inventory.Controllers
       #region Update Product
       public ActionResult UpdateProduct(int id)
       {
+         CategoriesService categories = new CategoriesService();
+         ViewBag.Categories = categories.GetAllCategories();
+
          ProductService productService = new ProductService();
 
          return View(productService.GetAllProducts().Find(cat => cat.ProductID == id));
       }
 
       [HttpPost]
-      public ActionResult UpdateProduct(int id, Products obj)
+      [ValidateAntiForgeryToken]
+      public ActionResult UpdateProduct(int? id, Products obj)
       {
          try
          {
             ProductService productService = new ProductService();
 
             productService.UpdateProduct(obj);
-            return RedirectToAction("Products");
+            return RedirectToAction("ProductList");
          }
          catch
          {
@@ -82,7 +94,7 @@ namespace Inventory.Controllers
                ViewBag.AlertMsg = "Products deleted successfully";
             }
 
-            return RedirectToAction("Products");
+            return RedirectToAction("ProductList");
          }
          catch
          {
@@ -90,5 +102,15 @@ namespace Inventory.Controllers
          }
       }
       #endregion
+
+      public ActionResult Dashboard()
+      {
+         ProductService productService = new ProductService();
+         ModelState.Clear();
+
+         ViewBag.SlNo = 1;
+
+         return View(productService.GetAllProducts());
+      }
    }
 }

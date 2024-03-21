@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Inventory.Models
 {
@@ -23,7 +24,7 @@ namespace Inventory.Models
 
          SqlCommand cmd = new SqlCommand();
          cmd.Connection = connection;
-         cmd.CommandText = "dbo.spOst_LstMember";
+         cmd.CommandText = "dbo.sp_Users";
          cmd.Parameters.Clear();
 
          cmd.Parameters.Add(new SqlParameter("@UserName", this.UserName));
@@ -40,17 +41,20 @@ namespace Inventory.Models
          {
             return true;
          }
-         //var pdata = (from p in dataTable.AsEnumerable()
-         //             where p.Field<string>("Name") == this.UserName && p.Field<string>("Password") == this.Password
-         //             select new { 
-         //                UserName= p.Field<string>("Name")
-         //             }
-         //             ).SingleOrDefault();
 
-         //if (pdata!=null)
-         //{
-         //    return true;
-         //}
+         var pdata = (from p in dataTable.AsEnumerable()
+                      where p.Field<string>("UserName") == this.UserName && p.Field<string>("Password") == this.Password
+                      select new
+                      {
+                         UserName = p.Field<string>("UserName")
+                      }
+                      ).SingleOrDefault();
+
+         if (pdata != null)
+         {
+            return true;
+         }
+
          return false;
       }
    }

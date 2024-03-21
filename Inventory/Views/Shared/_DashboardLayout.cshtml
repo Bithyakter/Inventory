@@ -17,9 +17,6 @@
    <link href="~/Content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
    <link href="~/Content/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
    <link href="~/Content/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-   <link href="~/Content/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-   <link href="~/Content/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-   <link href="~/Content/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
    <link href="~/Content/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
    <!-- Template Main CSS File -->
@@ -54,13 +51,22 @@
                <a class="nav-link nav-icon search-bar-toggle " href="#">
                   <i class="bi bi-search"></i>
                </a>
-            </li><!-- End Search Icon-->
+            </li>
+            <!-- End Search Icon-->
 
             <li class="nav-item dropdown pe-3">
 
                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                   <img src="~/Content/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                  <span class="d-none d-md-block dropdown-toggle ps-2">System Admin</span>
+                  @*<span class="d-none d-md-block dropdown-toggle ps-2">System Admin</span>*@
+
+                  @{
+                     if (Session["User"] != null)
+                     {
+                        <span class="d-none d-md-block dropdown-toggle ps-2">@Session["User"]</span>
+                     }                     
+                  }
+
                </a><!-- End Profile Iamge Icon -->
 
                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -75,28 +81,21 @@
                   <li>
                      <a class="dropdown-item d-flex align-items-center" href="#">
                         <i class="bi bi-person"></i>
-                        <span>My Profile</span>
+                        <span>Profile</span>
                      </a>
-                  </li>
+                  </li>                
                   <li>
                      <hr class="dropdown-divider">
                   </li>
 
                   <li>
-                     <a class="dropdown-item d-flex align-items-center" href="#">
-                        <i class="bi bi-gear"></i>
-                        <span>Account Settings</span>
-                     </a>
-                  </li>
-                  <li>
-                     <hr class="dropdown-divider">
-                  </li>
-
-                  <li>
-                     <a class="dropdown-item d-flex align-items-center" href="#">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Sign Out</span>
-                     </a>
+                     @using (Html.BeginForm("Logout", "Account", FormMethod.Post))
+                     {
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                           <i class="bi bi-box-arrow-right"></i>
+                           <input type="submit" name="btnLogout" value="Sign Out" />
+                        </a>
+                      }
                   </li>
 
                </ul><!-- End Profile Dropdown Items -->
@@ -153,14 +152,9 @@
    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
    <!-- Vendor JS Files -->
-   <script src="~/Content/assets/vendor/apexcharts/apexcharts.min.js"></script>
    <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
    <script src="~/Content/assets/vendor/chart.js/chart.min.js"></script>
-   <script src="~/Content/assets/vendor/echarts/echarts.min.js"></script>
-   <script src="~/Content/assets/vendor/quill/quill.min.js"></script>
    <script src="~/Content/assets/vendor/simple-datatables/simple-datatables.js"></script>
-   <script src="~/Content/assets/vendor/tinymce/tinymce.min.js"></script>
-   <script src="~/Content/assets/vendor/php-email-form/validate.js"></script>
 
    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
    <script src="~/Scripts/jquery.validate.min.js"></script>

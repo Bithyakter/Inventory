@@ -62,7 +62,9 @@ namespace Inventory.Services
                ProductID = Convert.ToInt32(dr["ProductID"]),
                Name = Convert.ToString(dr["Name"]),
                Price = Convert.ToDecimal(dr["Price"]),
-               Description = Convert.ToString(dr["Description"])
+               Description = Convert.ToString(dr["Description"]),
+               CategoryID = Convert.ToInt32(dr["CategoryID"]),
+               Categories = new Categories { Name = Convert.ToString(dr["CategoryName"]) }
             });
          }
 

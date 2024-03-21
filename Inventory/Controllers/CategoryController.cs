@@ -7,10 +7,13 @@ namespace Inventory.Controllers
    public class CategoryController : Controller
    {
       #region Category List
-      public ActionResult Categories()
+      public ActionResult CategoryList()
       {
          CategoriesService categoriesService = new CategoriesService();
          ModelState.Clear();
+
+         ViewBag.SlNo = 1;
+
          return View(categoriesService.GetAllCategories());
       }
       #endregion
@@ -22,6 +25,7 @@ namespace Inventory.Controllers
       }
 
       [HttpPost]
+      [ValidateAntiForgeryToken]
       public ActionResult CreateCategory(Categories category)
       {
          try
@@ -33,6 +37,7 @@ namespace Inventory.Controllers
                if (categoriesService.AddCategory(category))
                {
                   ViewBag.Message = "Category added successfully";
+                  //return RedirectToAction("CategoryList", "Category");
                }
             }
 
@@ -54,14 +59,17 @@ namespace Inventory.Controllers
       }
 
       [HttpPost]
-      public ActionResult UpdateCategory(int id, Categories obj)
+      [ValidateAntiForgeryToken]
+      public ActionResult UpdateCategory(int? id, Categories obj)
       {
          try
          {
+            //obj.CategoryID = id;
+
             CategoriesService categoriesService = new CategoriesService();
 
             categoriesService.UpdateCategory(obj);
-            return RedirectToAction("Categories");
+            return RedirectToAction("CategoryList");
          }
          catch
          {
@@ -82,7 +90,7 @@ namespace Inventory.Controllers
                ViewBag.AlertMsg = "Categories deleted successfully";
             }
 
-            return RedirectToAction("Categories");
+            return RedirectToAction("CategoryList");
          }
          catch
          {
