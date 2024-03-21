@@ -3,10 +3,6 @@
 @{
    ViewBag.Title = "Products";
    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-
-   var sl = Convert.ToInt32(ViewBag.SlNo);
-   var search = ViewData["Search"] as string;
-   var noMatchFound = !string.IsNullOrEmpty(search);
 }
 
 <div class="row ps-4 pe-4 offset-1">
@@ -96,10 +92,6 @@
 
                               <td>
                                  <a class="btn btn-info" href="/Products/UpdateProduct/@product.ProductID"><i class="bi bi-pencil-square"></i></a>
-
-                                 @*<a href="@Url.Action("DeleteCategory", new { id = category.CategoryID })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?');">
-                                    <span class="bi bi-trash"></span>
-                                 </a>*@
 
                                  <a class="btn btn-danger" href="/Products/DeleteProduct/@product.ProductID" onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash"></i></a>
 
