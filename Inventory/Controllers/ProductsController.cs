@@ -1,5 +1,7 @@
 ﻿using Inventory.Models;
 using Inventory.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Inventory.Controllers
@@ -7,13 +9,25 @@ namespace Inventory.Controllers
    public class ProductsController : Controller
    {
       #region Products List
-      public ActionResult ProductList()
+      public ActionResult ProductList(string search)
       {
          ProductService productService = new ProductService();
          ModelState.Clear();
+
+         IEnumerable<Inventory.Models.Products> products;
+
+         if (!string.IsNullOrEmpty(search))
+         {
+            products = productService.GetAllProducts().Where(p => p.Name.Contains(search));
+         }
+         else
+         {
+            products = productService.GetAllProducts();
+         }
+
          ViewBag.SlNo = 1;
 
-         return View(productService.GetAllProducts());
+         return View(products);
       }
 
       #endregion

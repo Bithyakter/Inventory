@@ -19,22 +19,22 @@
          </div>
 
          <div class="float-end col-md-6 pt-1">
+
             @using (Html.BeginForm("CategoryList", "Category", FormMethod.Get, new { id = "filterForm" }))
             {
-            <div class="input-group mb-2">
-               @Html.TextBox("search", null, new { @class = "form-control", id = "nameInput", placeholder = "Search by Name" })
-               @*@Html.Hidden("page", Model.PageNumber)*@
+               <div class="input-group mb-2">
+                  @Html.TextBox("search", null, new { @class = "form-control", id = "nameInput", placeholder = "Search by Name" })
 
-               <div class="input-group-append">
-                  <button type="submit" class="btn btn-primary rounded-1 search-p">
-                     <i class="bi bi-search"></i>
-                  </button>
+                  <div class="input-group-append">
+                     <button type="submit" class="btn btn-primary rounded-1 search-p">
+                        <i class="bi bi-search"></i>
+                     </button>
 
-                  <button class="btn btn-secondary btn-sm p-13" id="showAllButton">
-                     <i class="bi bi-arrow-counterclockwise"></i>
-                  </button>
+                     <button class="btn btn-secondary btn-sm p-13" id="showAllButton">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                     </button>
+                  </div>
                </div>
-            </div>
             }
          </div>
 

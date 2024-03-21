@@ -1,5 +1,7 @@
 ﻿using Inventory.Models;
 using Inventory.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Inventory.Controllers
@@ -7,15 +9,27 @@ namespace Inventory.Controllers
    public class CategoryController : Controller
    {
       #region Category List
-      public ActionResult CategoryList()
+      public ActionResult CategoryList(string search)
       {
          CategoriesService categoriesService = new CategoriesService();
          ModelState.Clear();
 
+         IEnumerable<Inventory.Models.Categories> categories;
+
+         if (!string.IsNullOrEmpty(search))
+         {
+            categories = categoriesService.GetAllCategories().Where(c => c.Name.Contains(search));
+         }
+         else
+         {
+            categories = categoriesService.GetAllCategories();
+         }
+
          ViewBag.SlNo = 1;
 
-         return View(categoriesService.GetAllCategories());
+         return View(categories);
       }
+
       #endregion
 
       #region Create Category

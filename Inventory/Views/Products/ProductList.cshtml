@@ -3,6 +3,10 @@
 @{
    ViewBag.Title = "Products";
    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+   var sl = Convert.ToInt32(ViewBag.SlNo);
+   var search = ViewData["Search"] as string;
+   var noMatchFound = !string.IsNullOrEmpty(search);
 }
 
 <div class="row ps-4 pe-4 offset-1">
@@ -17,20 +21,19 @@
          <div class="float-end col-md-6 pt-1">
             @using (Html.BeginForm("ProductList", "Products", FormMethod.Get, new { id = "filterForm" }))
             {
-            <div class="input-group mb-2">
-               @Html.TextBox("search", null, new { @class = "form-control", id = "nameInput", placeholder = "Search by Name" })
-               @*@Html.Hidden("page", Model.PageNumber)*@
+               <div class="input-group mb-2">
+                  @Html.TextBox("search", null, new { @class = "form-control", id = "nameInput", placeholder = "Search by Name" })
 
-               <div class="input-group-append">
-                  <button type="submit" class="btn btn-primary rounded-1 search-p">
-                     <i class="bi bi-search"></i>
-                  </button>
+                  <div class="input-group-append">
+                     <button type="submit" class="btn btn-primary rounded-1 search-p">
+                        <i class="bi bi-search"></i>
+                     </button>
 
-                  <button class="btn btn-secondary btn-sm p-13" id="showAllButton">
-                     <i class="bi bi-arrow-counterclockwise"></i>
-                  </button>
+                     <button class="btn btn-secondary btn-sm p-13" id="showAllButton">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                     </button>
+                  </div>
                </div>
-            </div>
             }
          </div>
 
@@ -75,28 +78,28 @@
                         <tbody>
                            @if (noMatchFound)
                            {
-                           <tr style="color:red; text-align: center;">
-                              <th colspan="5"><span class="fw-bold fs-5">No match Found!</span></th>
-                           </tr>
+                              <tr style="color:red; text-align: center;">
+                                 <th colspan="5"><span class="fw-bold fs-5">No match Found!</span></th>
+                              </tr>
                            }
                            else
                            {
                               foreach (var product in Model)
                               {
-                           <tr>
-                              <th scope="row">@sl</th>
-                              <td>@product.Categories.Name</td>
-                              <td>@product.Name</td>
-                              <td>@product.Price</td>
-                              <td>@product.Description</td>
+                                 <tr>
+                                    <th scope="row">@sl</th>
+                                    <td>@product.Categories.Name</td>
+                                    <td>@product.Name</td>
+                                    <td>@product.Price</td>
+                                    <td>@product.Description</td>
 
-                              <td>
-                                 <a class="btn btn-info" href="/Products/UpdateProduct/@product.ProductID"><i class="bi bi-pencil-square"></i></a>
+                                    <td>
+                                       <a class="btn btn-info" href="/Products/UpdateProduct/@product.ProductID"><i class="bi bi-pencil-square"></i></a>
 
-                                 <a class="btn btn-danger" href="/Products/DeleteProduct/@product.ProductID" onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash"></i></a>
+                                       <a class="btn btn-danger" href="/Products/DeleteProduct/@product.ProductID" onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash"></i></a>
 
-                              </td>
-                           </tr>
+                                    </td>
+                                 </tr>
                                  sl++;
                               }
                            }
