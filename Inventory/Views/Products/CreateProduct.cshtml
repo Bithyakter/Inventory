@@ -29,7 +29,13 @@
 
                <div class="col-md-12">
                   <div class="form-floating mt-2">
-                     @Html.DropDownListFor(model => model.CategoryID, new SelectList((IEnumerable<Inventory.Models.Categories>)ViewBag.Categories, "CategoryID", "Name"), "Select Category", new { @class = "form-control", id = "categoryInput" })
+                     @*@Html.DropDownListFor(model => model.CategoryID, new SelectList((IEnumerable<Inventory.Models.Categories>)ViewBag.Categories, "CategoryID", "Name"), "Select Category", new { @class = "form-control", id = "categoryInput" })*@
+
+                     @if (ViewBag.Categories != null)
+                     {
+                        @Html.DropDownListFor(model => model.CategoryID, new SelectList((IEnumerable<Inventory.Models.Categories>)ViewBag.Categories, "CategoryID", "Name"), "Select Category", new { @class = "form-control", id = "categoryInput" })
+                     }
+
                      <label for="categoryInput" class="control-label">Category</label>
                      @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                   </div>

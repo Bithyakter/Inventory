@@ -97,8 +97,10 @@
 
                                  @*@Html.ActionLink("Delete", "DeleteCategory", new { id = category.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?');", @class = "btn btn-danger", @id = $"delete-{category.CategoryID}" })*@
 
-                                 @Html.ActionLink("Delete", "DeleteCategory", new { id = category.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?');", @class = "btn btn-danger" })
-                                 <i class="bi bi-trash"></i>
+                                 <a class="btn btn-danger" href="/Category/DeleteCategory/@category.CategoryID" onclick="return confirm('Are you sure you want to delete?');"><i class="bi bi-trash"></i></a>
+
+                                 @*@Html.ActionLink("Delete", "DeleteCategory", new { id = category.CategoryID }, new { onclick = "return confirm('Are you sure you want to delete?');", @class = "btn btn-danger" })
+                                 <i class="bi bi-trash"></i>*@
 
                               </td>
                            </tr>
